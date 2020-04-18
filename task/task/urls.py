@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', views.UserCreate.as_view()),
     path('login/', views.loginUser.as_view()),
-    
+    path('',views.index,name="index_page"),
+    path('search/',views.homy,name="homy"),
+    path('grp/<str:slug2>/<str:slug>/',views.homy,name="homy")
 
 ]

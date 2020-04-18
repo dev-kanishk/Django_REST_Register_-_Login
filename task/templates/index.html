@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+      
+    </title>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>  
+</head>
+<body>
+	
+	<div style="text-align: center; margin-top: 50px; font-size: 22px">
+		<h2> Coders Meter by 1stRealHack</h2><br>
+	<form action="{% url 'homy'%}" method="GET">
+    {% csrf_token %}
+    Select Team Name:<br>
+    <!-- <input id="sheet" type="text" name="team" value=""><br> -->
+    <select id="team" name="team">
+    <!-- <option value="wait">Team 1</option> -->
+    <option value="Copy of Target 2021 Team-2A">Team 2A</option>
+    <option value="this">Team 2B</option>
+    
+  </select>
+  <br>
+    <br>
+    Sheet Name:<br>
+    <!-- <input id="sheet" type="text" name="slug" value=""> -->
+      <select id="team" name="slug">
+    <option value="Easy Problems">Easy</option>
+    <option value="Medium Problems">Medium</option>
+    <option value="Hard Problems">Hard</option>
+    
+  </select>
+    <br>
+    <br>
+    Enter Coder Name:<br>
+    <input id="value" type="text" name="slug2" value=""><br>
+    <br>
+    <input type="submit" class="btn btn-success" value="Search!">
+    <!-- <input type="button" class="btn btn-success" value="Submit" /> -->
+</form></div>
+
+</body>
+</html>
