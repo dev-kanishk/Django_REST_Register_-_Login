@@ -1,47 +1,161 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>
-      
-    </title>
-      <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>  
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Now_Or_Never</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+    <style type="text/css">
+        .bs-example{
+            margin: 20px;
+        }
+        .navbar{
+            margin-bottom: 1rem;
+        }
+        body {
+          background-color: whitesmoke;
+        }
+        .navbar-custom {
+    background-color:#343a40;
+    color:#ffffff;
+    border-radius:0;
+}
+footer{
+     background-color: #33383c;
+     padding:30px 0px;
+}
+
+.logo{
+    color:#FFF;
+    font-weight:700;
+    font-size:30px;
+}
+
+.address span , .menu span{
+   color: #FFF;
+   font-weight: bold;
+   border-bottom: 1px solid #c7c7c7;
+   padding:10px 0px;
+   display: block;
+   text-transform: uppercase;
+   font-size: 16px;
+   letter-spacing: 3px;
+}
+
+.address li a , .menu li a{
+    color:#FFF;
+    letter-spacing: 3px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.address li, .menu li{
+    margin:20px 0px;
+    list-style: none;
+}
+
+.address li a:hover , .menu li a:hover{
+    color: #da3e44;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+.address .fa{
+    color: #da3e44;
+    margin-right: 10px;
+    font-size:18px;
+}
+
+    </style>
+    </head>
 <body>
-	
+  <nav class="navbar navbar-expand-lg navbar-custom navbar-dark text-center">
+    <a href="{% url 'index_page' %}" class="navbar-brand">Now Or Never  (Progress Tracker)</a>
+    <!--<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse4">-->
+    <!--    <span class="navbar-toggler-icon"></span>-->
+    <!--</button>-->
+
+
+</nav>
+
 	<div style="text-align: center; margin-top: 50px; font-size: 22px">
-		<h2> Coders Meter by 1stRealHack</h2><br>
+		<h2> Cipher by 1stRealHack</h2><br>
 	<form action="{% url 'homy'%}" method="GET">
     {% csrf_token %}
     Select Team Name:<br>
     <!-- <input id="sheet" type="text" name="team" value=""><br> -->
-    <select id="team" name="team">
+    <select id="team" name="team" style="margin-bottom:17px; margin-top:5px;">
     <!-- <option value="wait">Team 1</option> -->
     <option value="Copy of Target 2021 Team-2A">Team 2A</option>
     <option value="this">Team 2B</option>
-    
+
   </select>
-  <br>
+
     <br>
-    Sheet Name:<br>
+    Select Sheet Name:<br>
     <!-- <input id="sheet" type="text" name="slug" value=""> -->
-      <select id="team" name="slug">
+      <select id="team" name="slug" style="margin-bottom:25px; margin-top:5px;">
     <option value="Easy Problems">Easy</option>
     <option value="Medium Problems">Medium</option>
     <option value="Hard Problems">Hard</option>
-    
+
   </select>
-    <br>
+
     <br>
     Enter Coder Name:<br>
     <input id="value" type="text" name="slug2" value=""><br>
     <br>
-    <input type="submit" class="btn btn-success" value="Search!">
+    <input type="submit" class= "btn  btn-primary" style="width:200px;" value="Search!">
     <!-- <input type="button" class="btn btn-success" value="Submit" /> -->
 </form></div>
+<hr>
+<br>
+<div style="text-align:center; width=20%">
+    <h3>The Higher the Better!!</h3>
+
+<ol>
+{% for curr in dic %}
+<hr>
+<li>
+    {% for i in curr %}
+    {{ i }}
+    {% endfor %}
+</li>
+
+{% endfor %}
+</ol>
+<hr>
+
+</div>
+  <footer>
+ <div class="container">
+   <div class="row">
+
+            <div class="col-md-5 col-sm-6 col-xs-12">
+              <span class="logo">1stRealHack</span>
+            </div>
+
+
+
+            <div class="col-md-7 col-sm-6 col-xs-12">
+              <ul class="address" style="color:white">
+                    <span>Developed by</span>
+
+    Kanishk Singhal&nbsp;  || &nbsp; Vishnu Kumar &nbsp; || &nbsp; Ashish Ranjan &nbsp;  || &nbsp; Tooba Zameer
+
+
+           </div>
+
+
+       </div>
+    </div>
+</footer>
 
 </body>
 </html>

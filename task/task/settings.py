@@ -26,7 +26,7 @@ SECRET_KEY = 'mmb%kf7^!yoym_&9ip6hgq_2d9(9vxfs!@pta_jowpw3oy24(f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['codermeter.pythonanywhere.com',]
 
 
 # Application definition
@@ -128,6 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/codermeter/Django_REST_Register_-_Login/task/static'
 
 REST_FRAMEWORK = {
   'DEFAULT_AUTHENTICATION_CLASSES': (

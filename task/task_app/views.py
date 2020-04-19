@@ -9,34 +9,36 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from rest_framework.authtoken.models import Token
 from .models import bios
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 import io
 import urllib, base64
 import gspread
 import pandas as pd
+from .topcoder import final_list
 from pprint import pprint
 from oauth2client.service_account import ServiceAccountCredentials
-
+import operator
+import string
 import matplotlib
 import numpy
 from matplotlib.dates import date2num
 # import matplotlib.pyplot as plt
 import json
-with open('task_app/json_data.json', 'r') as f:
-    my_json_obj = str(json.load(f))
+# with open('/home/codermeter/Django_REST_Register_-_Login/task/task_app/json_data.json', 'r') as f:
+#     my_json_obj = str(json.load(f))
 
 
 def number(data):
     if data == "" or data == "-":
         return False
-  
+
     return data.isdigit()
 
 def toNum(data):
     n = len(data)
     out = 0
     for i in range (n):
-        
+
         out += int(data[i])
     return out
 
@@ -45,23 +47,23 @@ def toNum(data):
 
 def complex(st):
 
-	
-	    
+
+
 	top = -1;
 	vt = []
 	ans = 0;
 	i = 0
 	while i < (len(st)):
-	    
+
 	    if i+1 < len(st) and ((st[i] == 'l'  and st[i+1] == 'o') or (st[i] == 'L' and st[i] == 'o') or (st[i] == 'L' and st[i] == 'O') ):
 	        if not(top == -1 or vt[top] == "*" or vt[top] == "+" or st[i] == '+' or st[i] == '*'):
 	            vt.append("*");
 	            top+=1;
-	        
+
 	        vt.append("logn");
 	        if ans == 0:
 	            ans = 10;
-	        
+
 	        else:
 	            if vt[top] == "*":
 	                ans *=10;
@@ -71,63 +73,63 @@ def complex(st):
 	        i+=3;
 	        print(i)
 	        top+=1;
-	    
+
 	    elif st[i] == 'O' or st[i] == 'o' or st[i] == '(' or st[i] == ')' or st[i] == '^' or st[i] == '<' or st[i] == '>' :
 	        i+=1;
 	        continue;
-	    
+
 	    else:
 	        if not(top == -1 or vt[top] == "*" or vt[top] == "+" or st[i] == '+'or st[i] == '*'):
 	            vt.append("*");
 	            top+=1;
-	        
-	        
-	        
+
+
+
 	        if not(ans == 0):
 	            curr = 0;
 	            if (st[i] >= 'a' and st[i] <= 'z') or (st[i] >= 'A' and st[i] <= 'Z'):
 	                curr = 100;
-	            
+
 	            elif st[i] >= '0' and st[i] <= '9':
 	                curr = int(st[i]);
-	            
+
 	            if vt[top] == "*" and curr > 0:
 	                if(curr < 10):
 	                    ans = pow(ans, curr);
 	                else:
 	                    ans *= curr;
-	                
-	            
+
+
 	            elif curr > 0:
 	                if curr < 10:
 	                    ans += 1;
 	                else:
 	                    ans += curr
-	                    
-	            
-	            
-	        
+
+
+
+
 	        else:
 	            if (st[i] >= 'a' and st[i] <= 'z') or (st[i] >= 'A' and st[i] <= 'Z'):
 	                ans = 100;
-	                
+
 	            else:
 	                ans = 1;
-	                
-	            
+
+
 	        ths = st[i];
-	            
-	            
+
+
 	        vt.append(ths);
 	        top+=1;
 	    i+=1;
-	        
-	       
-	    
-	    
+
+
+
+
 	# for i in range (len(vt)):
 	#     print(vt[i]);
-	    
+
 	return ans;
 
 
@@ -140,7 +142,7 @@ def homy(request):
 	slug = request.GET.get('slug')
 	slug = slug.strip()
 	slug2 = request.GET.get('slug2')
-	slug2 = slug2.strip()
+	slug2 = slug2.strip().lower()
 	team = request.GET.get('team').strip()
 	print(slug)
 	print(slug2)
@@ -149,7 +151,7 @@ def homy(request):
          "https://www.googleapis.com/auth/drive.file",
          "https://www.googleapis.com/auth/drive"]
 
-	creds = ServiceAccountCredentials.from_json_keyfile_name("task_app/json_data.json")
+	creds = ServiceAccountCredentials.from_json_keyfile_name("/home/codermeter/Django_REST_Register_-_Login/task/task_app/json_data.json")
 	com = 0;
 
 
@@ -157,7 +159,7 @@ def homy(request):
 
 
 	client = gspread.authorize(creds)
-	name = "Hard Problems"
+
 
 
 	sheet = client.open(team)
@@ -183,7 +185,7 @@ def homy(request):
 	for i in range(len(data[0])):
 		if data[0][i] != "":
 			# print(data[0][i])
-			name_index[data[0][i]] = i;
+			name_index[data[0][i].lower()] = i;
 		# print(name_index);
 
 	if slug2 not in name_index:
@@ -205,66 +207,68 @@ def homy(request):
 
 	lil = {}
 	count = 0;
-	times = []
-	for i in range(5,len(data[0])):
-		if number(data[i][name_index[who]+2]):
-			be_count+=1;
-			be += toNum(data[i][name_index[who]+2])
-		if number(data[i][name_index[who]+3]):
-			ae_count+=1;
-			ae += toNum(data[i][name_index[who]+3])
-		#     if data[i][name_index[who]] == "":
-		#         break
-		#     else:
-		#         print(data[i][5],data[i][6])
-		date = data[i][name_index[who]].split(" ")
-		#         print(date)
-		d  = date[0].split("/")
-		if not(data[i][name_index[who]+4] == "" or data[i][name_index[who]+4] =="-"):
-			co = complex(data[i][name_index[who]+4])
-			if co >= 1000000:
-				com_high += 1				
-			elif co >= 10000:
-				com_n2 += 1
-			elif co >= 100:
-				com_n += 1
-			elif co >= 10:
-				com_lg += 1
-			else:
-				com1 += 1;
-				
+	questions = 0
 
-        
-		if len(d) < 2:
-			continue;
-		
-		count+=1;
-		
+	for i in range(5,len(data[0])):
+	    if(data[i][3] != ""):
+	       questions+=1
+	    if number(data[i][name_index[who]+2]):
+	       be_count+=1;
+	       be += toNum(data[i][name_index[who]+2])
+	    if number(data[i][name_index[who]+3]):
+		    ae_count+=1;
+		    ae += toNum(data[i][name_index[who]+3])
+
+	    date = data[i][name_index[who]].split(" ")
+		#         print(date)
+	    d  = date[0].split("/")
+	    if not(data[i][name_index[who]+4] == "" or data[i][name_index[who]+4] =="-"):
+		    co = complex(data[i][name_index[who]+4])
+		    if co >= 1000000:
+			    com_high += 1
+		    elif co >= 10000:
+			    com_n2 += 1
+		    elif co >= 100:
+			    com_n += 1
+		    elif co >= 10:
+			    com_lg += 1
+		    else:
+			    com1 += 1;
+
+
+
+	    if len(d) < 2:
+		    continue;
+
+	    count+=1;
+
 		# print(d)
-		ths = int(d[0])+int(d[1])*31+int(d[2])*365;
-		if data[i][name_index[who]+1] != "":
-			if data[i][name_index[who]+1] != "no" and data[i][name_index[who]+1] != "No" and data[i][name_index[who]+1] != "NO":
-				yes += 1;
+	    ths = int(d[0])+int(d[1])*31+int(d[2])*365;
+	    if data[i][name_index[who]+1] != "":
+	    	if data[i][name_index[who]+1] != "no" and data[i][name_index[who]+1] != "No" and data[i][name_index[who]+1] != "NO":
+	    		yes += 1;
 
 
 			# print(data[i][name_index[who]+1])
-			if ths in lil.keys():
-				lil[ths]+=1
-			else:
-				lil[ths] = 1
+	    	if ths in lil.keys():
+	    		lil[ths]+=1
+	    	else:
+	    		lil[ths] = 1
 	#         else:
 	#             lil.append(0);
-	# type(times[0])  
+	# type(times[0])
+	if(count == 0):
+	    return render(request,'Zero_attempts.html',{})
+
 	plt.style.use("seaborn")
 	# dts = matplotlib.dates.datestr2num(times)
 	# print(dts)
 	# dts = matplotlib.dates.date2num(dts)
-	# scale_factor = 10
-	plt.xlabel("days")
-	plt.ylabel("Questions")
-
-	xmin, xmax = plt.xlim()
-	ymin, ymax = plt.ylim()
+# 	scale_factor = 10
+	plt.xlabel("days", fontsize=15)
+	plt.ylabel("Questions",fontsize=15)
+# 	xmin, xmax = plt.xlim()
+# 	ymin, ymax = plt.ylim()
 
 	# plt.xlim(xmin * scale_factor, xmax * scale_factor)
 	lists = sorted(lil.items()) # sorted by key, return a list of tuples
@@ -273,24 +277,24 @@ def homy(request):
 	y = list(y);
 	temp = 0
 	for i in range (len(y)):
-		temp += y[i]
-		progress.append(temp)
+	    temp += y[i]
+	    progress.append(temp)
 
 	x =numpy.asarray(x)
 	x =x - x[0]
-
 	y = numpy.asarray(y)
-
 	# dts = matplotlib.dates.datestr2num(x)
 	print(x,y)
 	print(count)
-	
-	
-	plt.figure(figsize=(25,10))
-	plt.title('daily attemps',fontsize=20)
+
+	plt.figure(figsize=(25,13))
+# 	plt.title('daily attemps',fontsize=27)
+	plt.xlabel("days", fontsize=27)
+	plt.ylabel("Questions",fontsize=27)
+	plt.tick_params(labelsize=25);
 	plt.plot(x,y)
-	plt.xlabel('Days', fontsize=18)
-	plt.ylabel('Attemps', fontsize=18)
+
+
 	fig = plt.gcf()
 	buf = io.BytesIO()
 	fig.savefig(buf,format='png')
@@ -298,8 +302,17 @@ def homy(request):
 	string = base64.b64encode(buf.read())
 	url = urllib.parse.quote(string)
 	plt.close()
-	plt.title('Progress')
+
+	plt.figure(figsize=(25,13))
+	plt.xlabel('Days', fontsize=27)
+	plt.ylabel('Attempts', fontsize=27)
+	plt.tick_params(labelsize=25);
+# 	matplotlib.rcParams.update({'font.size': 40})
+# 	set(gca,'FontSize',18);
+
+# 	plt.title('Progress',fontsize=27)
 	plt.plot(progress)
+
 	fig = plt.gcf()
 	buf = io.BytesIO()
 	fig.savefig(buf,format='png')
@@ -314,19 +327,15 @@ def homy(request):
 	sizes.append(com_n)
 	sizes.append(com_lg)
 	sizes.append(com1)
-	
 	colors = 'red','tab:orange','tab:green','tab:blue','brown'
-
 	# sizes = [15, 30, 45, 10]
 	explode = (0, 0.1, 0, 0.1,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
 	fig1, ax1 = plt.subplots()
-	ax1.pie(sizes, explode=explode, labels=labels, colors=colors,
-        shadow=True, startangle=90)
-	ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
-	# plt.show()
-	plt.title('code complexity')
+	ax1.pie(sizes, explode=explode, labels=labels, colors=colors,shadow=True, startangle=90)
+# 	plt.figure(figsize=(25,25))
+	ax1.axis('equal')
+# 	plt.title('code complexity')
+	plt.tick_params(labelsize=25);
 	fig = plt.gcf()
 	buf = io.BytesIO()
 	fig.savefig(buf,format='png')
@@ -336,17 +345,33 @@ def homy(request):
 	com = (com/count)*100
 	ae_av = 0;
 	if(ae_count > 0):
-		ae_av =round(ae/ae_count,2)
+	    ae_av =round(ae/ae_count,2)
 	be_av = 0;
 	if(be_count > 0):
-		be_av = round(be/be_count, 2)
+	    be_av = round(be/be_count, 2)
 	plt.close()
+	total = questions
+	time_spend = ae+be
+	pending = count-yes
+	perattempt = str(str((count/total)*100)+'%')
+	# perattempt = '30%';
+	slug2 = slug2.title()
 	return render(request,'home.html',{'data':url,'com1':com1,'com_lg':com_lg,'com_n':com_n,'com_n2':com_n2,
-		'com_high':com_high,'slug2':slug2,'count':count,'ae':ae,'ae_count':ae_count,'ae_av':ae_av,
-		'be':be, 'be_count':be_count, 'be_av':be_av,'url2':url2,'slug':slug,'yes':yes,'prg_url':prg_url})
+    	'com_high':com_high,'slug2':slug2,'count':count,'ae':ae,'ae_count':ae_count,'ae_av':ae_av,
+    	'be':be, 'be_count':be_count, 'be_av':be_av,'url2':url2,'slug':slug,'yes':yes,'prg_url':prg_url,
+    	'time_spend':time_spend,'total':total,'perattempt':perattempt,'pending':pending})
 
 def index(request):
-	return render(request,'index.html',{})
+	dic = final_list()
+	dic = sorted(dic.items(), key=operator.itemgetter(1),reverse=True)
+# 	dic = sorted(dic)
+# 	lil = list(dic.items())
+
+# 	lil = sorted(reverse = True)
+
+
+
+	return render(request,'index.html',{'dic':dic})
 
 class loginUser(APIView):
 
@@ -362,7 +387,7 @@ class loginUser(APIView):
 				mydict["phone_no"] = bios.objects.get(username = username).phone_no
 				mydict["username"] = username
 				return_serializer = InfoSerializer(data=mydict)
-				
+
 				if(return_serializer.is_valid()):
 				# 	return_serializer.save()
 
@@ -381,8 +406,8 @@ class loginUser(APIView):
 
 
 class UserCreate(APIView):
-    """ 
-    Creates the user. 
+    """
+    Creates the user.
     """
 
     def post(self, request, format='json'):
@@ -402,8 +427,8 @@ class UserCreate(APIView):
 
 	                return Response(json, status=status.HTTP_201_CREATED)
 	        return Response(serializer2.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        
+
+
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
