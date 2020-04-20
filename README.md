@@ -22,6 +22,8 @@ It uses Django framework and Google APIs to fetch the data from the Google Sheet
         present and Cipher for individual
         progress.
         
+![](https://github.com/dev-kanishk/Prograss-tracker/blob/master/Screenshot%20from%202020-04-20%2020-55-26.png)
+        
 
 
 **Step-2:** Select the Team from dropdown.
@@ -29,7 +31,7 @@ Select Sheet type you want to check
 for i.e. Easy, Medium or Hard.
 Enter the coder name.
 (Enter correct spelling with full name otherwise you'll get the error)
-Click the search button.
+Click the search button. 
 
 **Step-3:** Dash board for the individual will be
 there.
