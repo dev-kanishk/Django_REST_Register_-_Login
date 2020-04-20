@@ -44,7 +44,7 @@ there.
 
 ## Credits
 **1stRealHackTeam**
-Kanishk singhal
-Vishnu Kumar
-Ashish Ranjan
+Kanishk singhal ||
+Vishnu Kumar || 
+Ashish Ranjan || 
 Tooba Zameer
