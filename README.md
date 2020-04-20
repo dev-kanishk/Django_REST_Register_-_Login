@@ -35,6 +35,7 @@ Click the search button.
 
 **Step-3:** Dash board for the individual will be
 there.
+![](https://github.com/dev-kanishk/Prograss-tracker/blob/master/Screenshot%20from%202020-04-20%2020-58-04.png)
 
 ## For running locally:
 **Step-1:** Clone the repo to your system.
