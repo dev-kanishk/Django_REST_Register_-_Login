@@ -1,5 +1,7 @@
 # Progress tracker 
-  A Django Web application which track your efforts for Now and Never project by Nishant Bansal and Shivang Bansal and provide a dashboard having Progress graphs, Pie-charts and several other counts to calibrate your efforts so that you can achieve your goals also it has a rank list to see where you stand, creating a compitative environment.  
+ The tracker help the coder or their mentors to keep track of their daily and overall progress, showing the problems pending to be solved by them with a pie chart of complexities of the questions solved till then and the difficulty of problem stated by the one!
+And with this the mentors or anyone can track the progress and get to know whether they're doing good or have to improve their working!!
+It uses Django framework and Google APIs to fetch the data from the Google Sheet for the teams under Now or Never and display the dashboard for any member we want to track.  
 
 ## Motivation 
   Doing efforts without keeping a track of how well you are doing, whether efforts are fruit-full or not is a waste of time in this compitative world. Having a clean, beautiful and straight to the point prograss tracker can enhance your efforts mutiple times, give you a right direction and keep you motivated to achieve more. 
