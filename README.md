@@ -5,6 +5,6 @@
   Doing efforts without keeping a track of how well you are doing, whether efforts are fruit-full or not is a waste of time in this compitative world. Having a clean, beautiful and straight to the point prograss tracker can enhance your efforts mutiple times, give you a right direction and keep you motivated to achieve more. 
   
 ## Tech/framework used
-*Python
+* Item Python
 *Django
 *
