@@ -31,7 +31,7 @@ Click the search button.
 **Step-3:** Dash board for the individual will be
 there.
 
-## For running on local system:
+## For running locally:
 **Step-1:** Clone the repo to your system.
 
 **Step-2:** pip install -r requirements.txt
