@@ -41,3 +41,10 @@ there.
 **Step-4:** Run the command python manage.py runserver.
 
 **Step-5:** Open any browser and type http://127.0.0.1:8000/ in address bar.
+
+## Credits
+**1stRealHackTeam**
+Kanishk singhal
+Vishnu Kumar
+Ashish Ranjan
+Tooba Zameer
