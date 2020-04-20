@@ -38,4 +38,6 @@ there.
 
 **Step-3:** Navigative to manage.py which is present is task/task_app/ though terminal
 
-**step-4:** Run the command python manage.py runserver.
+**Step-4:** Run the command python manage.py runserver.
+
+**Step-5:** Open any browser and type http://127.0.0.1:8000/ in address bar.
