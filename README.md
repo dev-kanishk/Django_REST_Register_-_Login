@@ -31,3 +31,11 @@ Click the search button.
 **Step-3:** Dash board for the individual will be
 there.
 
+## For running on local system:
+**Step-1:** Clone the repo to your system.
+
+**Step-2:** pip install -r requirements.txt
+
+**Step-3:** Navigative to manage.py which is present is task/task_app/ though terminal
+
+**step-4:** Run the command python manage.py runserver.
