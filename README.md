@@ -21,7 +21,7 @@ It uses Django framework and Google APIs to fetch the data from the Google Sheet
         At the home page Rank list is
         present and Cipher for individual
         progress.
-        ![Image description](Screenshot from 2020-04-20 20-58-04.png)
+        
 
 
 **Step-2:** Select the Team from dropdown.
